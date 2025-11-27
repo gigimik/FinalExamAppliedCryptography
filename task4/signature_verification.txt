@@ -1,0 +1,12 @@
+Alice generated a PGP key pair.
+
+The message was encrypted using a public key ensuring confidentiality.
+
+Alice signed the message using her private key.
+
+During decryption, GPG verified:
+- The sender identity
+- Message integrity
+- Signature validity
+
+This confirms authenticity, integrity, and confidentiality.

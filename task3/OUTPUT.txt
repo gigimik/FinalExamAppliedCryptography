@@ -1,0 +1,100 @@
+TLS COMMUNICATION INSPECTION SUMMARY
+
+Website tested: www.google.com
+
+-------------------------------------------------------------------
+OpenSSL Analysis
+-------------------------------------------------------------------
+
+TLS Version:
+TLSv1.3
+
+Cipher Suite:
+TLS_AES_256_GCM_SHA384
+
+Certificate Chain:
+
+Root CA:
+CN=GlobalSign Root CA
+OU=Root CA
+O=GlobalSign nv-sa
+C=BE
+
+Intermediate CA:
+CN=GTS Root R4
+O=Google Trust Services LLC
+C=US
+
+Intermediate CA:
+CN=WE2
+O=Google Trust Services
+C=US
+
+Leaf Certificate:
+CN=www.google.com
+
+Verification:
+Verify return code: 0 (ok)
+
+-------------------------------------------------------------------
+Wireshark TLS Handshake Analysis
+-------------------------------------------------------------------
+
+Client Hello:
+The ClientHello message includes:
+- Supported TLS versions
+- Supported cipher suites
+- Random nonce
+- Extensions (such as SNI)
+
+Server Certificate:
+The server sends:
+- Leaf certificate for www.google.com
+- Intermediate CA certificates (WE2, GTS Root R4)
+- A chain to the trusted root (GlobalSign Root CA)
+
+Key Exchange:
+The key exchange uses:
+- TLS 1.3 key exchange group: X25519MLKEM768
+- Ephemeral keys providing Perfect Forward Secrecy
+
+-------------------------------------------------------------------
+How TLS Provides Security
+-------------------------------------------------------------------
+
+Confidentiality:
+TLS encrypts application data using symmetric encryption after
+the handshake. In this session, the cipher
+TLS_AES_256_GCM_SHA384 provides strong confidentiality.
+
+Integrity:
+Integrity is provided by authenticated encryption (AES-GCM),
+which detects any modification of encrypted data.
+
+Authentication:
+Authentication is achieved using X.509 certificates and the
+public key infrastructure (PKI). The server proves its identity
+through a certificate chain signed by a trusted CA.
+
+-------------------------------------------------------------------
+Notes on the Session
+-------------------------------------------------------------------
+
+The final "HTTP/1.0 400 Bad Request" is expected when using
+openssl s_client without sending a valid HTTP request. It does
+not indicate a TLS failure; the TLS handshake succeeded and the
+encrypted channel was established.
+
+-------------------------------------------------------------------
+Conclusion
+-------------------------------------------------------------------
+
+This TLS session demonstrates:
+
+- Encrypted HTTPS communication using TLS 1.3
+- A modern AEAD cipher suite (AES-256-GCM)
+- Strong certificate-based authentication
+- Secure key exchange and Perfect Forward Secrecy
+
+Together, these properties protect confidentiality, integrity,
+and authenticity of the communication.
